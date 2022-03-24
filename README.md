@@ -9,7 +9,9 @@ The Secret Image is also encrypted using a simple Caesar Cipher prior to the LSB
 
 i.e.
 Cover Image:  00001111, 11110000, 11110000, 00001111, 11110000, 00001111, 00001111, 11110000
+
 Secret Image: 01100101
+
 Stego Image:  00001110, 11110001, 11110001, 00001110, 11110000, 00001111, 00001110, 11110001
 
 The decoding process is simply the reverse. The cover image is processed 24 bytes at a time via a generator. The least significant bit of each byte is pulled out and combined into a Red, Green and Blue value to create 1 pixel of the Secret Image per 24 bytes of the Cover image. The metadata is also pulled out, including the filename, extension, and size of the hidden image, using delimiter characters to tell the program when the Image Data stops and when the Metadata starts.
