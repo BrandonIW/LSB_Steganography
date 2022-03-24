@@ -1,5 +1,5 @@
 # LSB_Steganography
-Python Program allowing the user to hide an image inside the Least Sig. Bit (LSB) of a second image (cover image). Requires that the cover image be slightly greater than 8x the size of the secret image (in bytes) as each byte of the hidden image will be hidden within a single bit of the cover image + metadata of the hidden image will also be embedded within the cover image. Tested with .bmp files only currently.
+Python Program allowing the user to hide an image inside the Least Sig. Bit (LSB) of a second image (cover image). Requires that the cover image be slightly greater than 8x the size of the secret image (in bytes) as each byte of the hidden image will be hidden within a single bit of the cover image + metadata of the hidden image will also be embedded within the cover image. Tested with .bmp and .png files only currently.
 
 There is error checking in place to ensure that the cover image and secret image are the appropriate sizes and the program will not start unless there is sufficient room in the cover image to hide the secret image + metadata. 
 
@@ -22,7 +22,7 @@ Once all the pixels are re-created for the Secret Image, they are combined with 
 
 ## Compatability
 * Runs on Python 3.9
-* Currently only tested for .bmp files
+* Currently only tested for .bmp and .png files
 * Tested on Windows 10 Version 10.0.19044 Build 19044
 * Secret and Cover images are converted to RGB Files if not already in RGB channel format 
 
