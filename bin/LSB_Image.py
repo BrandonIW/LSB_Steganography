@@ -99,7 +99,7 @@ def _extract_meta(secretimage, logger, secret_width, secret_height):
     secret_name, secret_ext = os.path.splitext(secretimage)
     logger.info(f"Extracting metadata {secret_name}, {secret_ext}")
 
-    metadata = "###" + secret_name + secret_ext + "###" + str(secret_width) + "x" + str(secret_height) + "###"
+    metadata = "###" + secret_name + secret_ext + "###" + str(secret_width) + "x" + str(secret_height) + "###" + "END"
     logger.info(f"Added Delimiters: {metadata}")
 
     metadata = metadata.encode('utf-8')
@@ -158,7 +158,7 @@ def decoder(stegofile, outfile):
     stego_pixel_generator = _stego_pixel_generator(stego_width, stego_height, stego_object)  # Pulls 24 pixels each call
 
     while not delim:
-        pixels = next(stego_pixel_generator)                                                 # Pull 12 pixels of stego.
+        pixels = next(stego_pixel_generator)                                                 # Pull 24 pixels of stego.
         cover_bin_list = [[bin(channel)[2:].zfill(8) for channel in tup] for tup in pixels]  # Convert to bits
         cover_bin_flat = [item for sublist in cover_bin_list for item in sublist]            # Flatten the list
 
@@ -190,24 +190,26 @@ def _hidden_data_extraction(pixels):
 
 def _extract_metadata(extracted_pixels, logger):
     """This functions extracts the filename, extension, pixels, width and height from the hidden data"""
-    filename_data = []
-    meta_idex_start = extracted_pixels.index((35, 35, 35))
+    regex_ext = re.compile(r'\.\w{3,}$')
+    regex_name = re.compile(r'(?<=\\)[\w\s]+(?=\.)')
 
+    # Isolates the data related to the hidden image itself
+    meta_idex_start = extracted_pixels.index((35, 35, 35))
+    image_data = extracted_pixels[:meta_idex_start]
+
+    # Isolates data relating to the filename, extension and size
     metadata = [str(num) for subtuble in extracted_pixels[meta_idex_start + 1:] for num in subtuble]
     metadata = " ".join(metadata).split("35 35 35")
     meta_filename_ext, meta_size = metadata[0].strip(" ").split(" "), metadata[1].strip(" ").split(" ")
 
-    width, height = chr(int(meta_size[0])), chr(int(meta_size[2]))
-    image_data = extracted_pixels[:meta_idex_start]
-
-    for num in meta_filename_ext:
-        filename_data.append(chr(int(num)))
-    filename_ext_data = "".join(filename_data)
-
-    regex_ext = re.compile(r'\.\w{3,}$')
-    regex_name = re.compile(r'(?<=\\)[\w\s]+(?=\.)')
+    # Logic to pull out file name and extension via regex
+    filename_ext_data = "".join([chr(int(num)) for num in meta_filename_ext])
     file_extension = regex_ext.search(filename_ext_data).group()
     file_name = regex_name.search(filename_ext_data).group()
+
+    # Logic to pull out file size
+    filesize_data = "".join([chr(int(num)) for num in meta_size])
+    height, width = filesize_data.split("x")
 
     logger.info(f"Filename: {file_name} | Extension: {file_extension} | Width: {width} | Height: {height}")
     return image_data, file_name, file_extension, int(width), int(height)
@@ -230,7 +232,7 @@ def _check_meta(extracted_pixels):
     as we'd be extracting pixels belonging to the cover image at this point"""
     rgb_flattened = "".join([str(num) for subtuple in extracted_pixels for num in subtuple])
     detect_delim = rgb_flattened.split("353535")
-    if len(detect_delim) >= 3:
+    if len(detect_delim) >= 4:
         return True
     return False
 

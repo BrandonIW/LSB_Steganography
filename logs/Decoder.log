@@ -1,2 +1,20 @@
 2022-03-22 17:09:50,596 || INFO || Successfully opened stegofile ..\Output Files\Test1.bmp || LSB_Image
 2022-03-22 17:10:18,815 || INFO || Successfully opened stegofile ..\Output Files\Test1.bmp || LSB_Image
+2022-03-23 19:04:26,647 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-23 19:05:05,794 || INFO || Filename: Coloured_Dog_Small_Test1 | Extension: .bmp | Width: 1 | Height: 0 || LSB_Image
+2022-03-23 19:07:00,592 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-23 19:07:54,949 || INFO || Filename: Coloured_Dog_Small_Test1 | Extension: .bmp | Width: 1 | Height: 0 || LSB_Image
+2022-03-23 19:31:30,600 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-23 19:35:38,543 || INFO || Filename: Coloured_Dog_Small_Test1 | Extension: .bmp | Width: 1 | Height: 0 || LSB_Image
+2022-03-23 19:43:35,104 || INFO || Opened Stegofile: ..\Output Files\DogTest2.bmp || LSB_Image
+2022-03-23 20:14:58,718 || INFO || Opened Stegofile: ..\Output Files\DogTest3.bmp || LSB_Image
+2022-03-23 20:23:01,752 || INFO || Opened Stegofile: ..\Output Files\DogTest3.bmp || LSB_Image
+2022-03-24 08:52:43,681 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-24 08:53:02,511 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-24 09:08:08,370 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-24 09:10:14,931 || INFO || Filename: Small_DogTest | Extension: .bmp | Width: 120 | Height: 150 || LSB_Image
+2022-03-24 09:13:45,862 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-24 09:15:01,197 || INFO || Filename: Small_DogTest | Extension: .bmp | Width: 120 | Height: 150 || LSB_Image
+2022-03-24 09:15:57,550 || INFO || Opened Stegofile: ..\Output Files\DogTest.bmp || LSB_Image
+2022-03-24 09:17:02,525 || INFO || Filename: Small_DogTest | Extension: .bmp | Width: 150 | Height: 120 || LSB_Image
+2022-03-24 09:17:24,325 || INFO || Successfully created restored Image: ..\Restored Hidden\DogTest.bmp || LSB_Image
