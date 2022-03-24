@@ -3,7 +3,7 @@ Python Program allowing the user to hide an image inside the Least Sig. Bit (LSB
 
 There is error checking in place to ensure that the cover image and secret image are the appropriate sizes and the program will not start unless there is sufficient room in the cover image to hide the secret image + metadata. 
 
-The Program uses the Least Sig. Bit methodology. The program will first open both the cover and secret image, and iterate through each RGB pixel of the secret image, paired with 8 RGB pixels of the cover image. Each pixel is separated into their respective channels, and the least significant bit of each channel (byte) is replaces with the most significant bit of the secret image to create a resultant stego image. 
+The Program uses the Least Sig. Bit methodology. The program will first open both the cover and secret image, and iterate through each RGB pixel of the secret image, paired with 8 RGB pixels of the cover image. Each pixel is separated into their respective channels, and the least significant bit of each channel (byte) is replaces with the most significant bit of the secret image to create a resultant stego image. This program re-creates the image bit-for-bit, as all bits of the secret image are preserved. There is no loss of data/quality.
 
 The Secret Image is also encrypted using a simple Caesar Cipher prior to the LSB Transformation of the cover image
 
