@@ -29,10 +29,10 @@ Once all the pixels are re-created for the Secret Image, they are combined with 
 # How To
 ## Usage:
   If Encoding:
-  LSB_Main.py -c <coverfile> -s <secretfile> -o <outputfile>
+  LSB_Main.py -c coverfile.bmp -s secretfile.bmp -o outputfile.bmp
   
   If Decoding:
-  LSB_Main.py -f <stegofile> -o <hidden output file>
+  LSB_Main.py -f stegofile.bmp -o restored_outputfile.bmp
   
 ## Options:
   -h, --help                Show this help
@@ -47,18 +47,34 @@ Once all the pixels are re-created for the Secret Image, they are combined with 
 *  -o, --output=<file>       File that the extracted hidden data will be written to ( Only required for decoding )
 
 
-## Quickstart
+# Quickstart
 1) Download .ZIP File and extract to a directory of your choice
-2) ```sudo python3 SSH_Auth_Monitor.py -t [Timelimit] -f [logfile] -l [Threshold]```
-3) i.e. ``` sudo python3 SSH_Auth_Monitor.py -t 5 -l 5 ```
+2) Example Input files are provided in the 'Input Files' Folder for testing
+3) i.e. Encoding: ```python3 LSB_Main.py -c "..\Input Files\Cover_DogTest.bmp" -s "..\Input Files\Small_DogTest.bmp" -o "..\Output Files\DogTest.bmp"```
+4) i.e. Decoding: ```python3 LSB_Main.py -f "..\Output Files\DogTest.bmp" -o "..\Restored Hidden\DogTest.bmp"```
 
-### Example Output
-![image](https://user-images.githubusercontent.com/77559638/151867534-33fc3318-df21-4297-8a7a-df7a83e98b74.png)
 
-![image](https://user-images.githubusercontent.com/77559638/151867617-4409faf3-0614-4f7e-bd8c-b092345b847c.png)
+# Example Output
+## Basic Interface
+![image](https://user-images.githubusercontent.com/77559638/159966875-3f14783f-0d6e-4917-88f7-271be51f7319.png)
 
-![image](https://user-images.githubusercontent.com/77559638/151867645-a87869fd-7458-4da8-9532-41bb13fda312.png)
+  
+![image](https://user-images.githubusercontent.com/77559638/159967135-6116c5fa-6e75-4462-9258-30af562b7340.png)
 
-![image](https://user-images.githubusercontent.com/77559638/151871927-9a8b0749-5aab-43ca-8db6-3dad96e68fe5.png)
+  
+## Cover Image (no Hidden Data) and Secret Image (will be embedded)
+  ![image](https://user-images.githubusercontent.com/77559638/159967661-fb241dba-de16-44bf-9468-01b3432e0e11.png)
+  
+  
+  ![image](https://user-images.githubusercontent.com/77559638/159967737-196a0e67-c723-4cab-8799-e5b89b9a7d89.png)
+
+  
+## Stego Image (with Hidden Data)
+![image](https://user-images.githubusercontent.com/77559638/159967477-dee395bc-14db-4327-8cae-ff0fd4596b3d.png)
+
+
+## Restored Secret Image
+![image](https://user-images.githubusercontent.com/77559638/159967878-86e70214-45ff-4b17-8ba9-f30ef67cda52.png)
+
 
 
