@@ -28,12 +28,6 @@ Options:
   -o, --output=<file>       File that the extracted hidden data will be written to ( Only required for decoding )
 """
 
-# -c "..\Input Files\Large_DogTest.bmp" -s "..\Input Files\Small_DogTest.bmp" -o "..\Output Files\DogTest.bmp"
-# -f "..\Output Files\DogTest.bmp" -o "..\Restored Hidden\DogTest.bmp"
-
-# TODO - Test only of BMP files first. Edit the Help/Parser with whatever file formats we end up doing
-# TODO - Edit the option #3 (print help stuff) if we find out that what we put so far is wrong lol
-# TODO - Depending on if we use png and jpg etc. then we might need to do some checks for the --output option?
 # TODO - Encryption of hidden file before stego creation
 
 class Bcolours:
