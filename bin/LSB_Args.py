@@ -21,9 +21,8 @@ def _build_parser(encoding):
                                                                                              "image that will "
                                                                                              "function to "
                                                                                              "hide/obfuscate "
-                                                                                             "the hidden image (png, "
-                                                                                             "bmp "
-                                                                                             "or jpg)")
+                                                                                             "the hidden image (png or "
+                                                                                             "bmp)")
 
         required_args.add_argument('-s', '--secret', required=True, type=_validate_file, help="Please enter the "
                                                                                               "relative "
@@ -31,7 +30,7 @@ def _build_parser(encoding):
                                                                                               "image that will be "
                                                                                               "hidden "
                                                                                               "inside the cover image ("
-                                                                                              "bmp file)")
+                                                                                              "bmp or png file)")
 
         required_args.add_argument('-o', '--output', required=True, type=str, help="Please enter the name of the "
                                                                                    "resultant "
@@ -64,9 +63,9 @@ def _validate_file(file):
         raise argparse.ArgumentTypeError(f"File path of {file} cannot be found, or is not a file. "
                                          f"Please check the file path")
 
-    if imghdr.what(file) not in ['jpg', 'png', 'bmp']:
+    if imghdr.what(file) not in ['png', 'bmp']:
         raise argparse.ArgumentTypeError(f"The file provided is not a valid image file. Image file must be a "
-                                         f"jpg, png or bmp file")
+                                         f"png or bmp file")
 
     try:
         with open(file, 'rb') as test_file:
