@@ -8,6 +8,7 @@ The Program uses the Least Sig. Bit methodology. The program will first open bot
 The Secret Image is also encrypted using a simple Caesar Cipher prior to the LSB Transformation of the cover image
 
 i.e.
+
 Cover Image:  00001111, 11110000, 11110000, 00001111, 11110000, 00001111, 00001111, 11110000
 
 Secret Image: 01100101
