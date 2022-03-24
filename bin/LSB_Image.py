@@ -32,7 +32,7 @@ class StegImage:
                 if self.pixels:
                     pixel_object[x, y] = self.pixels.popleft()
                     continue
-                rgb_cover.save(self.outfile, "bmp")
+                rgb_cover.save(self.outfile)
                 return
 
 
@@ -51,7 +51,7 @@ class HiddenImage:
             for x in range(self.width):
                 pixel_object[x, y] = self.pixels.popleft()
 
-        new_img.save(self.output, "bmp")
+        new_img.save(self.output)
         return
 
 
@@ -79,7 +79,7 @@ def encoder(coverimage, secretimage, outfile):
     logger.info(f"Successfully Created Stego Object")
 
     for y in range(secret_height):                        # Pull out a single hidden pixel and 8 cover bytes for each
-        for x in range(secret_width):                     # Pixel coordinate of the hidden photo. Replace LSB and write
+        for x in range(secret_width):                     # pixel coordinate of the hidden photo. Replace LSB and write
             red, green, blue = secret_object[x, y]
             secret_pixel = [bin(channel)[2:].zfill(8) for channel in [red, green, blue]]
             cover_pixels = next(cover_pixel_generator)
