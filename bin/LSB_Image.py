@@ -239,12 +239,16 @@ def _check_meta(extracted_pixels):
 
 # Cryptography---------------------------------------------
 
-def encryption():
-    pass
+def encryption(byte):
+    byte_stack = deque(byte)
+    byte_stack.rotate(3)
+    return "".join(byte_stack)
 
 
-def decryption():
-    pass
+def decryption(byte):
+    byte_stack = deque(byte)
+    byte_stack.rotate(-3)
+    return "".join(byte_stack)
 
 
 # Loggers---------------------------------------------
