@@ -26,9 +26,14 @@ Options:
   If Decoding:
   -f, --stegofile=<file>    File with the hidden data that will be extracted ( Only required for decoding )
   -o, --output=<file>       File that the extracted hidden data will be written to ( Only required for decoding )
+  
+Examples:
+  -o "..\Restored Hidden\Restored_Dog.bmp" -f "..\Output Files\Dog.bmp"
+  -o "..\Output Files\Dog.bmp" -s "..\Input Files\Secret_Dog.bmp" -c "..\Input Files\Cover_Dog.bmp"
+  
+  -o "..\Output Files\Bird.png" -s "..\Input Files\Secret_Bird.png" -c "..\Input Files\Cover_Bird.png"
+  -o "..\Restored Hidden\Restored_Bird.png" -f "..\Output Files\Bird.png"
 """
-
-# TODO - Encryption of hidden file before stego creation
 
 class Bcolours:
     HEADER = '\033[95m'
@@ -85,7 +90,6 @@ def _encode_image():
           f"Output File: {args.output}")
 
     encoder(args.cover, args.secret, args.output)
-    print(f"{Bcolours.OKGREEN}Completed. Output/Stego File: {args.output}")
 
 
 def _decode_image():
@@ -99,10 +103,10 @@ def _decode_image():
           f"Output File: {args.output}")
 
     decoder(args.stegofile, args.output)
-    print(f"{Bcolours.OKGREEN}Completed. Output Hidden File: {args.output}")
 
 
-#####________Menu Printing Functions________######
+# Menu Printing ---------------------------------------------
+
 
 def _print_main_menu():
     menu_options = {
