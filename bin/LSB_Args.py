@@ -8,7 +8,7 @@ def check_args(encoding=False):
     return args
 
 
-#####________Argument Parser & Verifiers________######
+# Argument Parsers & Verifiers---------------------------------------------
 
 def _build_parser(encoding):
     """ Build Parser to verify and accept user-defined arguments """
@@ -59,15 +59,15 @@ def _build_parser(encoding):
 
 
 def _validate_file(file):
-    if not os.path.isfile(file):
-        raise argparse.ArgumentTypeError(f"File path of {file} cannot be found, or is not a file. "
-                                         f"Please check the file path")
-
-    if imghdr.what(file) not in ['png', 'bmp']:
-        raise argparse.ArgumentTypeError(f"The file provided is not a valid image file. Image file must be a "
-                                         f"png or bmp file")
-
     try:
+        if not os.path.isfile(file):
+            raise argparse.ArgumentTypeError(f"File path of {file} cannot be found, or is not a file. "
+                                             f"Please check the file path")
+
+        if imghdr.what(file) not in ['png', 'bmp']:
+            raise argparse.ArgumentTypeError(f"The file provided is not a valid image file. Image file must be a "
+                                             f"png or bmp file")
+
         with open(file, 'rb') as test_file:
             test_file.read()
             return file
