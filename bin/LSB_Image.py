@@ -78,10 +78,12 @@ def encoder(coverimage, secretimage, outfile):
     steg_image = StegImage(cover_height, cover_width, coverimage, outfile)
     logger.info(f"Successfully Created Stego Object")
 
-    for y in range(secret_height):                        # Pull out a single hidden pixel and 8 cover bytes for each
+    for y in range(secret_height):                        # Pull out a single hidden pixel and 24 cover bytes for each
         for x in range(secret_width):                     # pixel coordinate of the hidden photo. Replace LSB and write
             red, green, blue = secret_object[x, y]
             secret_pixel = [bin(channel)[2:].zfill(8) for channel in [red, green, blue]]
+            secret_pixel = [encryption(byte) for byte in secret_pixel]  # Encrypt
+
             cover_pixels = next(cover_pixel_generator)
             new_pixels = _lsb_replace(secret_pixel, cover_pixels)
             steg_image.add_pixels(new_pixels)
@@ -97,7 +99,7 @@ def encoder(coverimage, secretimage, outfile):
 
 def _extract_meta(secretimage, logger, secret_width, secret_height):
     secret_name, secret_ext = os.path.splitext(secretimage)
-    logger.info(f"Extracting metadata {secret_name}, {secret_ext}")
+    logger.info(f"Extracting metadata {secret_name}, {secret_ext}, {secret_width}x{secret_height}")
 
     metadata = "###" + secret_name + secret_ext + "###" + str(secret_width) + "x" + str(secret_height) + "###" + "END"
     logger.info(f"Added Delimiters: {metadata}")
@@ -112,6 +114,9 @@ def _extract_meta(secretimage, logger, secret_width, secret_height):
         logger.info(f"Adding Padding: {metadata}")
 
     metadata = [metadata[idex:idex + 8] for idex in range(0, len(metadata), 8)]  # Split into chunks of 8 to match
+    for idex, byte in enumerate(metadata):
+        metadata[idex] = encryption(byte)
+
     metadata = [metadata[idex:idex + 3] for idex in range(0, len(metadata), 3)]  # generator's 8 byte output. Split
     return list(filter(lambda bit_set: bit_set, metadata))                       # again into chunks of 3 to replicate
                                                                                  # a single pixel
@@ -184,6 +189,9 @@ def _hidden_data_extraction(pixels):
         data.append(byte[-1])
 
     hidden_pixels_bytes = ["".join(data[idex:idex + 8]) for idex in range(0, len(data), 8)]
+    for idex, byte in enumerate(hidden_pixels_bytes):
+        hidden_pixels_bytes[idex] = decryption(byte)
+
     return [tuple(int(byte, 2) for byte in hidden_pixels_bytes)[idex:idex + 3] \
             for idex in range(0, len(hidden_pixels_bytes), 3)]
 
@@ -243,7 +251,6 @@ def encryption(byte):
     byte_stack = deque(byte)
     byte_stack.rotate(3)
     return "".join(byte_stack)
-
 
 def decryption(byte):
     byte_stack = deque(byte)
